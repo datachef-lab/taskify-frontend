@@ -5,29 +5,35 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-    { ignores: ["dist"] },
-    {
-        extends: [js.configs.recommended, ...tseslint.configs.recommended],
-        files: ["**/*.{ts,tsx}"],
-        languageOptions: {
-            ecmaVersion: 2020,
-            globals: globals.browser,
-        },
-        plugins: {
-            "react-hooks": reactHooks,
-            "react-refresh": reactRefresh,
-        },
-        rules: {
-            ...reactHooks.configs.recommended.rules,
-            "react-refresh/only-export-components": [
-                "warn",
-                { allowConstantExport: true },
-            ],
-            "no-unused-vars": "warn",
-            "no-undef": "warn",
-            "prefer-const": ["error", { "ignoreReadBeforeAssign": true }],
-            semi: "warn",
-            "no-console": "warn",
-        },
+  { ignores: ["dist"] },
+  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
+    plugins: {
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+
+      "no-unused-vars": [
+        "warn",
+        {
+          varsIgnorePattern: "^React$", // Ignore React import
+          argsIgnorePattern: "^_", // Ignore unused arguments prefixed with _
+          destructuredArrayIgnorePattern: "^_", // Ignore unused destructured array items
+        },
+      ],
+      "react/jsx-uses-react": "error", // Disable React requirement for JSX
+      "no-undef": "warn",
+      "prefer-const": ["error", { ignoreReadBeforeAssign: true }],
+      semi: "warn",
+      "no-console": "warn",
+    },
+  }
 );
