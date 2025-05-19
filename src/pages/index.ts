@@ -13,6 +13,8 @@ import TemplatesPage from "@/pages/TemplatesPage";
 import InventoriesPage from "@/pages/InventoriesPage";
 import InvoicesPage from "@/pages/InvoicesPage";
 import DocumentsPage from "@/pages/DocumentsPage";
+import TaskPage from "@/pages/TaskPage";
+import CustomerPage from "./CustomerPage";
 
 export {
     RootPage,
@@ -30,4 +32,6 @@ export {
     InventoriesPage,
     InvoicesPage,
     DocumentsPage,
+    TaskPage,
+    CustomerPage,
 }

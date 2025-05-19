@@ -9,7 +9,9 @@ export default function HomeLayout() {
       <AppSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader />
-        <Outlet />
+        <div className="p-2">
+          <Outlet />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
