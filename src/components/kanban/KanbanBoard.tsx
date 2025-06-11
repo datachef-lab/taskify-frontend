@@ -61,7 +61,7 @@ export function KanbanBoard({
       // Update the task status
       onTaskUpdate({
         id: taskId,
-        status: targetColumnId,
+        status: targetColumnId as "todo" | "in-progress" | "review" | "done",
       });
     }
   };
@@ -117,7 +117,7 @@ export function KanbanBoard({
       </DndContext>
 
       <TaskDetailsModal
-        task={selectedTask}
+        task={selectedTask ?? undefined}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={(updatedTask) => {
@@ -128,7 +128,6 @@ export function KanbanBoard({
           }
         }}
         onDelete={onTaskDelete}
-        isCreating={isCreatingTask}
       />
     </div>
   );

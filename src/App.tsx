@@ -22,9 +22,11 @@ import {
 import TaskTemplatePage from "./pages/TaskTemplatePage";
 import FnTemplatePage from "./pages/FnTemplatePage";
 import FieldTemplatePage from "./pages/FieldTemplatePage";
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   { path: "/", element: <RootPage /> },
+  { path: "/login", element: <Login /> },
   {
     path: "/home",
     element: <HomeLayout />,
