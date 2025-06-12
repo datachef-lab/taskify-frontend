@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { Sparkles, Zap, Target } from 'lucide-react';
 
 // Import all images
+import dataChefLogo from '@/assets/images/logo.png';
 import floatingGhibli1 from './../assets/images/floating-ghibli-1.png';
 import floatingGhibli2 from './../assets/images/floating-ghibli-2.png';
 import floatingGhibli3 from './../assets/images/img.png';
@@ -96,7 +97,7 @@ const BrandingSide = () => {
     {
       icon: Sparkles,
       title: "Smart Organization",
-      description: "AI-powered task categorization and priority management",
+      description: "Task categorization and priority management",
       color: "from-purple-400 to-pink-500"
     },
     {
@@ -147,7 +148,7 @@ const BrandingSide = () => {
             ref={subtitleRef}
             className="text-sm sm:text-lg md:text-lg text-slate-300 leading-relaxed font-medium max-w-lg mx-auto"
           >
-            Transform your productivity journey with intelligent task management powered by AI
+            Transform your productivity journey with intelligent task management 
           </p>
         </div>
 
@@ -222,6 +223,14 @@ const BrandingSide = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-6 text-center text-slate-400 text-xs relative z-20">
+          <div className="flex items-center justify-center space-x-2 mb-1">
+            <img src={dataChefLogo} alt="Data Chef Logo"  className="h-5 w-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] hover:scale-105 transition-transform duration-300"  />
+            <p className="font-semibold ">Data Chef</p>
+          </div>
+          <p className="text-slate-500 mb-1">For <span className="font-bold text-slate-300">Shiva Enterprises</span></p>
+          <p>Copyright &copy; 2025 Data Chef  |  Tech Sahyogi Innoventure Pvt Ltd</p>
         </div>
       </div>
     </div>
