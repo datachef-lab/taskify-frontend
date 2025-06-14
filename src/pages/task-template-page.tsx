@@ -24,7 +24,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { mockTaskTemplatesWithRelations } from "@/lib/data/mockTemplates";
+import { mockTaskTemplatesWithRelations } from "@/lib/data/mock-templates";
 
 export default function TaskTemplatePage() {
   const { taskTemplateId } = useParams();

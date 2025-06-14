@@ -9,18 +9,18 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { TaskCard } from "./TaskCard";
-import { Task } from "./TaskDetailsModal";
+import { TaskCard } from "./task-card";
+import { Task } from "./task-details-modal";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
-import { TaskDetailsModal } from "./TaskDetailsModal";
+import { TaskDetailsModal } from "./task-details-modal";
 import {
   SortableContext,
   arrayMove,
   horizontalListSortingStrategy,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { KanbanColumn } from "./KanbanColumn";
+import { KanbanColumn } from "./kanban-column";
 
 interface KanbanBoardProps {
   tasks: Task[];

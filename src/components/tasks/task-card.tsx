@@ -5,7 +5,7 @@ import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Calendar, Clock } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import { Task } from "./TaskDetailsModal";
+import { Task } from "./task-details-modal";
 import { format } from "date-fns";
 import { formatDistanceToNow } from "date-fns";
 import { cn } from "@/lib/utils";

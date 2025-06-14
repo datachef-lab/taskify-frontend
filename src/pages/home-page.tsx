@@ -1,6 +1,6 @@
-import { ChartAreaInteractive } from "@/components/layouts/home-layout/ChartAreaInteractive";
-import { DataTable } from "@/components/layouts/home-layout/DataTable";
-import { SectionCards } from "@/components/layouts/home-layout/SectionCards";
+import { ChartAreaInteractive } from "@/components/layouts/home-layout/chart-area-interactive";
+import { DataTable } from "@/components/layouts/home-layout/data-table";
+import { SectionCards } from "@/components/layouts/home-layout/section-cards";
 import data from "@/components/layouts/home-layout/data.json";
 
 export default function HomePage() {

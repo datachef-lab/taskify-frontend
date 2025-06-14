@@ -1,7 +1,7 @@
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
-import { TaskCard } from "./TaskCard";
-import { Task } from "./TaskDetailsModal";
+import { TaskCard } from "./task-card";
+import { Task } from "./task-details-modal";
 
 interface TaskColumnProps {
   id: string;

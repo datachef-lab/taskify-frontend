@@ -4,9 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { gsap } from 'gsap';
 
-import BrandingSide from '../components/BrandingSide';
-import EmailLoginForm from '@/components/login/EmailLoginForm';
-import OTPLoginForm from '@/components/login/OTPLoginForm';
+import BrandingSide from '../components/branding-side';
+import EmailLoginForm from '@/components/login/email-login-form';
+import OTPLoginForm from '@/components/login/otp-login-form';
 import { FcGoogle } from 'react-icons/fc';
 
 

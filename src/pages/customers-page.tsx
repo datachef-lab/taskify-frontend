@@ -49,9 +49,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
-import { DataTablePagination } from "@/components/common/DataTablePagination";
-import { DataTableViewOptions } from "@/components/common/DataTableViewOption";
-import { DataTableColumnHeader } from "@/components/common/DataTableColumnHeader";
+import { DataTablePagination } from "@/components/common/data-table-pagination";
+import { DataTableViewOptions } from "@/components/common/data-table-view-option";
+import { DataTableColumnHeader } from "@/components/common/data-table-column-header";
 
 interface PaginatedResponse<T> {
   data: T[];

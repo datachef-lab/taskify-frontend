@@ -17,7 +17,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { mockTaskTemplatesWithRelations } from "@/lib/data/mockTemplates";
+import { mockTaskTemplatesWithRelations } from "@/lib/data/mock-templates";
 
 export default function TemplatesPage() {
   const navigate = useNavigate();

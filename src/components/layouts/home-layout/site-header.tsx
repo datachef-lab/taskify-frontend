@@ -1,8 +1,8 @@
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { NotificationsSheet } from "./NotificationsSheet";
-import { ProfileMenu } from "./ProfileMenu";
+import { NotificationsSheet } from "./notifications-sheet";
+import { ProfileMenu } from "./profile-menu";
 
 export function SiteHeader() {
   return (

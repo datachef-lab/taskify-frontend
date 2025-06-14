@@ -40,8 +40,8 @@ import {
   InputTemplateWithRelations,
   ConditionalAction,
 } from "@/lib/types/task";
-import { DropdownOptionList } from "../components/templates/DropdownOptionList";
-import { CheckboxOptionList } from "../components/templates/CheckboxOptionList";
+import { DropdownOptionList } from "../components/templates/dropdown-option-list";
+import { CheckboxOptionList } from "../components/templates/checkbox-option-list";
 
 // Extended interface to add type-specific properties that aren't in the base InputTemplate
 interface ExtendedInputTemplate extends InputTemplateWithRelations {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useThemeConfig } from "@/providers/ActiveTheme";
+import { useThemeConfig } from "@/providers/active-theme";
 import { Label } from "@/components/ui/label";
 import {
   Select,

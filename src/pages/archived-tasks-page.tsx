@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import {
-  ArchiveRestoreIcon,
-  SearchIcon,
-  Filter,
-  CheckIcon,
-} from "lucide-react";
+import { useState } from "react";
+import { ArchiveRestoreIcon, SearchIcon, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {

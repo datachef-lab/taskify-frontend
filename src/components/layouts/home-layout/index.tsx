@@ -1,6 +1,6 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/layouts/home-layout/AppSidebar";
-import { SiteHeader } from "@/components/layouts/home-layout/SiteHeader";
+import { AppSidebar } from "@/components/layouts/home-layout/app-sidebar";
+import { SiteHeader } from "@/components/layouts/home-layout/site-header";
 import { Outlet } from "react-router";
 
 export default function HomeLayout() {

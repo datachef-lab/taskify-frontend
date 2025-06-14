@@ -4,8 +4,8 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { TaskCard } from "../tasks/TaskCard";
-import { TaskDetailsModal, Task } from "../tasks/TaskDetailsModal";
+import { TaskCard } from "../tasks/task-card";
+import { TaskDetailsModal, Task } from "../tasks/task-details-modal";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 

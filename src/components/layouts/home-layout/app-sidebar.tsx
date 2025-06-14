@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  ArrowUpCircleIcon,
   BarChartIcon,
   ClipboardListIcon,
   FileArchiveIcon,
@@ -19,9 +18,9 @@ import {
   FileStackIcon,
 } from "lucide-react";
 
-import { NavMain } from "@/components/layouts/home-layout/NavMain";
-import { NavSecondary } from "@/components/layouts/home-layout/NavSecondary";
-import { NavUser } from "@/components/layouts/home-layout/NavUser";
+import { NavMain } from "@/components/layouts/home-layout/nav-main";
+import { NavSecondary } from "@/components/layouts/home-layout/nav-secondary";
+import { NavUser } from "@/components/layouts/home-layout/nav-user";
 import {
   Sidebar,
   SidebarContent,

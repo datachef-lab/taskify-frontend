@@ -1,5 +1,4 @@
 import { Customer as CustomerType } from "@/lib/types";
-import React from "react";
 
 const dummyCustomer: CustomerType = {
   id: 1,

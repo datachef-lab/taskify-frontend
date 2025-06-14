@@ -28,7 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { mockTaskTemplatesWithRelations } from "@/lib/data/mockTemplates";
+import { mockTaskTemplatesWithRelations } from "@/lib/data/mock-templates";
 import {
   InputType,
   ConditionType,
@@ -44,8 +44,8 @@ import {
   CheckboxTemplateWithActions,
   ConditionalAction,
 } from "@/lib/types/task";
-import { DropdownOptionList } from "@/components/templates/DropdownOptionList";
-import { CheckboxOptionList } from "@/components/templates/CheckboxOptionList";
+import { DropdownOptionList } from "@/components/templates/dropdown-option-list";
+import { CheckboxOptionList } from "@/components/templates/checkbox-option-list";
 
 // Extended interface to add type-specific properties that aren't in the base InputTemplate
 interface ExtendedInputTemplate extends InputTemplateWithRelations {

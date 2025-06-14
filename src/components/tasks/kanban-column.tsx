@@ -1,6 +1,6 @@
 import React from "react";
-import { Task } from "./TaskDetailsModal";
-import { TaskCard } from "./TaskCard";
+import { Task } from "./task-details-modal";
+import { TaskCard } from "./task-card";
 import { useDroppable } from "@dnd-kit/core";
 import {
   SortableContext,

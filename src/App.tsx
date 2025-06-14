@@ -1,6 +1,6 @@
-import { ThemeProvider } from "@/providers/ThemeProvider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
-import { ActiveThemeProvider } from "./providers/ActiveTheme";
+import { ActiveThemeProvider } from "./providers/active-theme";
 import { Toaster } from "@/components/ui/sonner";
 import {
   ArchivedTasksPage,
@@ -21,10 +21,10 @@ import {
   TrashedTasksPage,
   UsersPage,
 } from "@/pages";
-import TaskTemplatePage from "./pages/TaskTemplatePage";
-import FnTemplatePage from "./pages/FnTemplatePage";
-import FieldTemplatePage from "./pages/FieldTemplatePage";
-import Login from './pages/Login';
+import TaskTemplatePage from "./pages/task-template-page";
+import FnTemplatePage from "./pages/fn-template-page";
+import FieldTemplatePage from "./pages/field-template-page";
+import Login from "./pages/login-page";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootPage /> },

@@ -1,20 +1,20 @@
-import RootPage from "@/pages/RootPage";
-import HomePage from "@/pages/HomePage";
+import RootPage from "@/pages/root-page";
+import HomePage from "@/pages/home-page";
 import HomeLayout from "@/components/layouts/home-layout";
-import TaskboardPage from "@/pages/TaskboardPage";
-import ReportsPage from "@/pages/ReportsPage";
-import ArchivedTasksPage from "@/pages/ArchivedTasksPage";
-import UsersPage from "@/pages/UsersPage";
-import CustomersPage from "@/pages/CustomersPage";
-import ParentCompaniesPage from "@/pages/ParentCompaniesPage";
-import TrashedTasksPage from "@/pages/TrashedTasksPage";
-import DropdownsPage from "@/pages/DropdownsPage";
-import TemplatesPage from "@/pages/TemplatesPage";
-import InventoriesPage from "@/pages/InventoriesPage";
-import InvoicesPage from "@/pages/InvoicesPage";
-import DocumentsPage from "@/pages/DocumentsPage";
-import TaskPage from "@/pages/TaskPage";
-import CustomerPage from "./CustomerPage";
+import TaskboardPage from "@/pages/task-board-page";
+import ReportsPage from "@/pages/reports-page";
+import ArchivedTasksPage from "@/pages/archived-tasks-page";
+import UsersPage from "@/pages/users-page";
+import CustomersPage from "@/pages/customers-page";
+import ParentCompaniesPage from "@/pages/parent-companies-page";
+import TrashedTasksPage from "@/pages/trashed-tasks-page";
+import DropdownsPage from "@/pages/dropdowns-page";
+import TemplatesPage from "@/pages/templates-page";
+import InventoriesPage from "@/pages/inventories-page";
+import InvoicesPage from "@/pages/invoices-page";
+import DocumentsPage from "@/pages/documents-page";
+import TaskPage from "@/pages/task-page";
+import CustomerPage from "./custome-page";
 
 export {
     RootPage,

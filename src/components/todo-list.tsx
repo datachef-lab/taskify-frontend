@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useTodos } from "../hooks/useTodos";
+import { useTodos } from "../hooks/use-todos";
 import { useAppDispatch } from "../hooks/redux";
-import { setFilter } from "../store/slices/todoSlice";
-import type { Todo } from "../store/slices/todoSlice";
+import { setFilter } from "../store/slices/todo-slice";
+import type { Todo } from "../store/slices/todo-slice";
 
 export const TodoList: React.FC = () => {
   const [newTodoTitle, setNewTodoTitle] = useState("");

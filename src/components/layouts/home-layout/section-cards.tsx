@@ -1,5 +1,5 @@
 import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
-import { useThemeConfig } from "@/providers/ActiveTheme";
+import { useThemeConfig } from "@/providers/active-theme";
 
 import { Badge } from "@/components/ui/badge";
 import {

@@ -16,12 +16,12 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { TaskColumn } from "./TaskColumn";
-import { TaskCard } from "./TaskCard";
+import { TaskColumn } from "./task-column";
+import { TaskCard } from "./task-card";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { TaskDetailsModal, Task } from "./TaskDetailsModal";
+import { TaskDetailsModal, Task } from "./task-details-modal";
 
 // Define column interface
 interface Column {
