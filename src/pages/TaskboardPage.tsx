@@ -1,303 +1,192 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
-  DndContext,
-  closestCorners,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragOverlay,
-  DragStartEvent,
-  DragEndEvent,
-} from "@dnd-kit/core";
-import {
-  SortableContext,
-  arrayMove,
-  sortableKeyboardCoordinates,
-  rectSortingStrategy,
-  useSortable,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { PlusIcon, GripVertical } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-// Define the task type
-interface Task {
-  id: string;
-  content: string;
-  status: string;
-  priority: "high" | "medium" | "low";
-}
-
-// Define the board column type
-interface Column {
-  id: string;
-  title: string;
-  tasks: Task[];
-}
-
-// Initial data for the kanban board
-const initialColumns: Column[] = [
+// Mock task data for the table
+const mockTasks = [
   {
-    id: "todo",
-    title: "To Do",
-    tasks: [
-      {
-        id: "task-1",
-        content: "Design Kanban interface",
-        status: "todo",
-        priority: "high",
-      },
-      {
-        id: "task-2",
-        content: "Create drag and drop functionality",
-        status: "todo",
-        priority: "high",
-      },
-      {
-        id: "task-3",
-        content: "Implement column organization",
-        status: "todo",
-        priority: "medium",
-      },
-    ],
+    id: "S2505080",
+    customer: "EIGHTEEN WOODLAND PROPERTIES PVT LTD",
+    jobNumber: "123/O",
+    latestDepartmentName: "SERVICE",
+    latestFunctionName: "Follow-Up with Customer",
+    priority: "NORMAL",
+    lastEdited: "May 10th, 2025 19:22",
+    status: "todo",
+    assignee: "me",
   },
   {
-    id: "in-progress",
-    title: "In Progress",
-    tasks: [
-      {
-        id: "task-4",
-        content: "Set up dnd-kit integration",
-        status: "in-progress",
-        priority: "high",
-      },
-      {
-        id: "task-5",
-        content: "Style the kanban board",
-        status: "in-progress",
-        priority: "medium",
-      },
-    ],
+    id: "S2505040",
+    customer: "ALIPORE SIDDHARTHA RESIDENT 'S' WELFARE ASSOCIATION",
+    jobNumber: "121/O",
+    latestDepartmentName: "SERVICE",
+    latestFunctionName: "Follow-Up with Customer",
+    priority: "NORMAL",
+    lastEdited: "May 10th, 2025 18:50",
+    status: "todo",
+    assignee: "me",
   },
   {
-    id: "done",
-    title: "Done",
-    tasks: [
-      {
-        id: "task-6",
-        content: "Project planning",
-        status: "done",
-        priority: "high",
-      },
-      {
-        id: "task-7",
-        content: "Component architecture design",
-        status: "done",
-        priority: "medium",
-      },
-      {
-        id: "task-8",
-        content: "Theme selection",
-        status: "done",
-        priority: "low",
-      },
-    ],
+    id: "S2504019",
+    customer: "ARCH GALAXY RESIDENTIAL FLAT OWNERS ASS",
+    jobNumber: "014/O",
+    latestDepartmentName: "DISPATCH",
+    latestFunctionName: "Invoicing",
+    priority: "NORMAL",
+    lastEdited: "May 9th, 2025 19:13",
+    status: "done",
+    assignee: "other",
   },
 ];
 
-// Task Item Component
-function TaskItem({
-  task,
-  isOverlay = false,
-}: {
-  task: Task;
-  isOverlay?: boolean;
-}) {
-  const priorityColors = {
-    high: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
-    medium:
-      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
-    low: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-  };
-
+function PriorityBadge({ priority }: { priority: string }) {
+  const color =
+    priority === "HIGH"
+      ? "bg-red-100 text-red-700"
+      : priority === "MEDIUM"
+      ? "bg-yellow-100 text-yellow-700"
+      : "bg-blue-100 text-blue-700";
   return (
-    <Card className={cn("mb-2 shadow-sm", isOverlay && "shadow-md rotate-1")}>
-      <CardHeader className="py-2 px-3 flex flex-row justify-between items-start">
-        <div className="text-sm font-medium">{task.content}</div>
-        <Badge
-          className={cn("ml-2 text-[10px]", priorityColors[task.priority])}
-        >
-          {task.priority}
-        </Badge>
-      </CardHeader>
-    </Card>
-  );
-}
-
-// Sortable Task Component
-function SortableTaskItem({ task }: { task: Task }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: task.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
-    zIndex: isDragging ? 1 : 0,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} className="relative">
-      <div
-        {...listeners}
-        className="absolute top-2 left-2 cursor-grab active:cursor-grabbing opacity-50 hover:opacity-100"
-      >
-        <GripVertical size={14} />
-      </div>
-      <TaskItem task={task} />
-    </div>
-  );
-}
-
-// Column Component
-function Column({ column }: { column: Column }) {
-  return (
-    <div className="bg-gray-100 dark:bg-gray-800/50 p-2 rounded-lg w-full">
-      <h3 className="font-semibold mb-2 px-2 flex justify-between">
-        {column.title}
-        <Badge variant="outline" className="ml-2">
-          {column.tasks.length}
-        </Badge>
-      </h3>
-
-      <div className="min-h-32">
-        <SortableContext
-          items={column.tasks.map((task) => task.id)}
-          strategy={rectSortingStrategy}
-        >
-          {column.tasks.map((task) => (
-            <SortableTaskItem key={task.id} task={task} />
-          ))}
-        </SortableContext>
-      </div>
-
-      <Button variant="ghost" size="sm" className="w-full mt-2">
-        <PlusIcon size={14} className="mr-1" />
-        Add task
-      </Button>
-    </div>
+    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${color}`}>
+      {priority}
+    </span>
   );
 }
 
 export default function TaskboardPage() {
-  const [columns, setColumns] = useState(initialColumns);
-  const [activeTask, setActiveTask] = useState<Task | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
-  // Setup sensors for drag and drop
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-  // Find a task in any column
-  const findTask = useCallback(
-    (id: string) => {
-      for (const column of columns) {
-        const task = column.tasks.find((task) => task.id === id);
-        if (task) return { task, column };
-      }
-      return { task: null, column: null };
-    },
-    [columns]
-  );
-
-  // Handle drag start
-  const handleDragStart = useCallback(
-    (event: DragStartEvent) => {
-      const { active } = event;
-      const { task } = findTask(active.id as string);
-      setActiveTask(task);
-    },
-    [findTask]
-  );
-
-  // Handle drag end
-  const handleDragEnd = useCallback(
-    (event: DragEndEvent) => {
-      const { active, over } = event;
-
-      if (!over) return;
-
-      // Find the active task
-      const { task: activeTask, column: activeColumn } = findTask(
-        active.id as string
-      );
-
-      if (!activeTask || !activeColumn) return;
-
-      // Move within the same column
-      setColumns((prevColumns) => {
-        return prevColumns.map((col) => {
-          // Skip columns that don't match
-          if (col.id !== activeColumn.id) return col;
-
-          const oldIndex = col.tasks.findIndex((t) => t.id === activeTask.id);
-          const newIndex = col.tasks.findIndex((t) => t.id === over.id);
-
-          if (oldIndex === -1 || newIndex === -1) return col;
-
-          // Return updated column with reordered tasks
-          return {
-            ...col,
-            tasks: arrayMove(col.tasks, oldIndex, newIndex),
-          };
-        });
-      });
-
-      setActiveTask(null);
-    },
-    [findTask]
-  );
+  const filteredTasks = mockTasks.filter((task) => {
+    const matchesSearch =
+      task.id.toLowerCase().includes(search.toLowerCase()) ||
+      task.customer.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus =
+      statusFilter === "all" ? true : task.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Project Taskboard</h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCorners}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
+    <div className="w-full p-4 md:p-8">
+      <h1 className="text-2xl font-bold mb-6">Taskboard</h1>
+      <Card className="mb-6 p-4 flex flex-col md:flex-row gap-4 items-center justify-between w-full shadow-lg rounded-xl">
+        <Input
+          aria-label="Search by Task ID or Customer"
+          placeholder="Search by Task ID or Customer"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full md:w-1/3"
+        />
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-full md:w-48">
+            <SelectValue placeholder="All Statuses" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Statuses</SelectItem>
+            <SelectItem value="todo">To Do</SelectItem>
+            <SelectItem value="in-progress">In Progress</SelectItem>
+            <SelectItem value="done">Done</SelectItem>
+            <SelectItem value="overdue">Overdue</SelectItem>
+          </SelectContent>
+        </Select>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setSearch("");
+            setStatusFilter("all");
+          }}
         >
-          {columns.map((column) => (
-            <Column key={column.id} column={column} />
-          ))}
-
-          <DragOverlay>
-            {activeTask ? <TaskItem task={activeTask} isOverlay /> : null}
-          </DragOverlay>
-        </DndContext>
+          Reset
+        </Button>
+      </Card>
+      <div className="mb-2 flex flex-col md:flex-row items-center justify-between gap-2">
+        <span className="text-sm text-gray-500">
+          Showing {filteredTasks.length} task
+          {filteredTasks.length !== 1 ? "s" : ""}
+        </span>
+        <div className="border-t w-full md:ml-4" />
       </div>
+      <Card className="overflow-x-auto w-full p-0 shadow-lg rounded-xl">
+        <Table className="w-full">
+          <TableHeader className="sticky top-0 z-10 bg-white">
+            <TableRow>
+              <TableHead>Sr. No.</TableHead>
+              <TableHead>Task Id</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Job Number</TableHead>
+              <TableHead>Latest Department Name</TableHead>
+              <TableHead>Latest Function Name</TableHead>
+              <TableHead>Priority</TableHead>
+              <TableHead>Last Edited</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredTasks.length === 0 ? (
+              <TableRow>
+                <TableCell
+                  colSpan={8}
+                  className="text-center py-6 text-gray-500"
+                >
+                  No tasks found.
+                </TableCell>
+              </TableRow>
+            ) : (
+              filteredTasks.map((task, idx) => (
+                <TableRow
+                  key={task.id}
+                  className={
+                    (idx % 2 === 0 ? "bg-gray-50" : "") +
+                    " hover:bg-blue-50 transition"
+                  }
+                >
+                  <TableCell>{idx + 1}</TableCell>
+                  <TableCell>
+                    <a
+                      href={`#task-${task.id}`}
+                      className="font-mono text-blue-700 underline underline-offset-2 hover:text-blue-900"
+                    >
+                      {task.id}
+                    </a>
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      title={task.customer}
+                      className="block truncate max-w-xs"
+                    >
+                      {task.customer}
+                    </span>
+                  </TableCell>
+                  <TableCell>{task.jobNumber}</TableCell>
+                  <TableCell>{task.latestDepartmentName}</TableCell>
+                  <TableCell>{task.latestFunctionName}</TableCell>
+                  <TableCell>
+                    <PriorityBadge priority={task.priority} />
+                  </TableCell>
+                  <TableCell className="text-xs text-gray-500">
+                    {task.lastEdited}
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </Card>
     </div>
   );
 }

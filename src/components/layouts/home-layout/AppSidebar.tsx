@@ -32,6 +32,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Link } from "react-router";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const data = {
   user: {
@@ -138,7 +139,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
-      collapsible="offcanvas"
+      collapsible="icon"
       {...props}
       className="border-r border-indigo-200 dark:border-indigo-900/40"
     >
@@ -147,11 +148,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:!p-1.5 h-[45px] cursor-pointer"
             >
               <Link to="/home">
-                <ArrowUpCircleIcon className="h-5 w-5 " />
-                <span className="text-base font-semibold">Taskify</span>
+                <Avatar>
+                  <AvatarImage
+                    className="border-2 border-indigo-200 dark:border-indigo-900/40 rounded-full ring-4 ring-indigo-200 dark:ring-indigo-900/40"
+                    src="/shiva-enterprise-logo.png"
+                  />
+                  <AvatarFallback>
+                    <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-300 tracking-wide mt-0.5 whitespace-nowrap">
+                      company-logo
+                    </span>
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-extrabold text-[16px]">SHIVA ENTERPRISES</p>
+                  <span className="text-[14px] font-extrabold text-indigo-600 dark:text-indigo-300 tracking-wide mt-0.5 whitespace-nowrap">
+                    #taskify
+                  </span>
+                </div>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

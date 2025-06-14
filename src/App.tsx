@@ -4,6 +4,7 @@ import { ActiveThemeProvider } from "./providers/ActiveTheme";
 import { Toaster } from "@/components/ui/sonner";
 import {
   ArchivedTasksPage,
+  CustomerPage,
   CustomersPage,
   DocumentsPage,
   DropdownsPage,
@@ -15,6 +16,7 @@ import {
   ReportsPage,
   RootPage,
   TaskboardPage,
+  TaskPage,
   TemplatesPage,
   TrashedTasksPage,
   UsersPage,
@@ -33,14 +35,28 @@ const router = createBrowserRouter([
     children: [
       // Primary
       { path: "", element: <HomePage /> },
-      { path: "taskboard", element: <TaskboardPage /> },
+      {
+        path: "taskboard",
+        element: <Outlet />,
+        children: [
+          { path: "", element: <TaskboardPage /> },
+          { path: ":taskboardId", element: <TaskPage /> },
+        ],
+      },
       { path: "reports", element: <ReportsPage /> },
       { path: "archived", element: <ArchivedTasksPage /> },
       { path: "trashed", element: <TrashedTasksPage /> },
 
       // Masters
       { path: "parent-companies", element: <ParentCompaniesPage /> },
-      { path: "customers", element: <CustomersPage /> },
+      {
+        path: "customers",
+        element: <Outlet />,
+        children: [
+          { path: "", element: <CustomersPage /> },
+          { path: ":customerId", element: <CustomerPage /> },
+        ],
+      },
       { path: "dropdowns", element: <DropdownsPage /> },
       { path: "inventories", element: <InventoriesPage /> },
       { path: "invoices", element: <InvoicesPage /> },
