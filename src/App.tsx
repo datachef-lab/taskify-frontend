@@ -25,6 +25,7 @@ import TaskTemplatePage from "./pages/task-template-page";
 import FnTemplatePage from "./pages/fn-template-page";
 import FieldTemplatePage from "./pages/field-template-page";
 import Login from "./pages/login-page";
+import ActivitiesPage from "./pages/activities-page";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootPage /> },
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
 
       // Masters
       { path: "parent-companies", element: <ParentCompaniesPage /> },
+      { path: "activity-logs", element: <ActivitiesPage /> },
       {
         path: "customers",
         element: <Outlet />,

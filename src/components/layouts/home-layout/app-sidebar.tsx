@@ -16,6 +16,7 @@ import {
   BuildingIcon,
   CreditCardIcon,
   FileStackIcon,
+  Activity,
 } from "lucide-react";
 
 import { NavMain } from "@/components/layouts/home-layout/nav-main";
@@ -100,6 +101,11 @@ const data = {
     },
   ],
   navSettings: [
+    {
+      title: "Activity Logs",
+      url: "/home/activity-logs",
+      icon: Activity,
+    },
     {
       title: "Users",
       url: "/home/users",
